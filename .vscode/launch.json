@@ -1,0 +1,61 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CartoesMsApplication",
+            "request": "launch",
+            "mainClass": "com.ms.cartoes.cartoes_ms.CartoesMsApplication",
+            "projectName": "com.ms.cartoes-cartoes-ms"
+        },
+        {
+            "type": "java",
+            "name": "EmissorMsApplication",
+            "request": "launch",
+            "mainClass": "com.ms.emissor.emissor_ms.EmissorMsApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EmailApplication<email>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ms.email.email.EmailApplication",
+            "projectName": "email",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=60720 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=email"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-UserApplication<user>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ms.user.user.UserApplication",
+            "projectName": "user",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EmissorMsApplication<emissor-ms>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ms.emissor.emissor_ms.EmissorMsApplication",
+            "projectName": "emissor-ms",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=61434 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=emissor-ms"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CartoesMsApplication<cartoes-ms>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ms.cartoes.cartoes_ms.CartoesMsApplication",
+            "projectName": "cartoes-ms",
+            "args": "--spring.profiles.active=local",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=60720 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=cartoes-ms"
+        }
+    ]
+}
