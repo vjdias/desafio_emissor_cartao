@@ -3,10 +3,12 @@ package com.ms.cartoes.cartoes_ms.models;
 import java.io.Serializable;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +24,8 @@ public class ClientModel implements Serializable {
     private String account;
     private Double limitCredit;
     private String nameProposal;
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String emailProposalContent;
 
     public UUID getClientId() {
