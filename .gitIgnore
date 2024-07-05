@@ -1,0 +1,62 @@
+# Java & Spring Boot
+target/
+*.jar
+*.war
+*.ear
+
+# Node & React
+node_modules/
+build/
+dist/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+**/log/
+**/logs/
+
+# IntelliJ
+*.iml
+.idea/
+out/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Eclipse
+*.metadata
+*.class
+*.project
+*.classpath
+.c9/
+.tern-project
+.settings/
+bin/
+tmp/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# History
+.history/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
