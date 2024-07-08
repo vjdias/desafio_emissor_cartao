@@ -9,13 +9,14 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import com.ms.emissor.emissor_ms.mappers.EmailMapper;
 import com.ms.emissor.emissor_ms.models.EmailModel;
 import com.ms.emissor.emissor_ms.models.StatusEmail;
 import com.ms.emissor.emissor_ms.services.impl.EmailSenderService;
+
+import jakarta.mail.internet.MimeMessage;
 
 @SpringBootTest
 class EmailSenderServiceTest {
@@ -32,27 +33,22 @@ class EmailSenderServiceTest {
     private EmailModel emailModel;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         emailModel = new EmailModel();
+        emailModel.setEmailFrom("from@example.com");
         emailModel.setEmailTo("test@example.com");
         emailModel.setSubject("Test Subject");
         emailModel.setText("Test Body");
 
-        Mockito.when(emailMapper.mapToSimpleMailMessage(any(EmailModel.class), any(String.class)))
-               .thenAnswer(invocation -> {
-                   EmailModel model = invocation.getArgument(0);
-                   String from = invocation.getArgument(1);
-                   SimpleMailMessage message = new SimpleMailMessage();
-                   message.setFrom(from);
-                   message.setTo(model.getEmailTo());
-                   message.setSubject(model.getSubject());
-                   message.setText(model.getText());
-                   return message;
-               });
+        MimeMessage mimeMessage = Mockito.mock(MimeMessage.class);
+        Mockito.when(emailMapper.mapToMimeMessage(any(EmailModel.class), any(JavaMailSender.class), emailModel.getEmailFrom()))
+               .thenReturn(mimeMessage);
+
+        Mockito.doNothing().when(emailSender).send(any(MimeMessage.class));
     }
 
     @Test
-    void testHandleEmailSuccess() {
+    void testHandleEmailSuccess() throws Exception {
         EmailModel result = emailSenderService.handleEmail(emailModel);
         assertEquals(StatusEmail.SENT, result.getStatusEmail());
     }

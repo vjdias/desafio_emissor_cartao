@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ms.emissor.emissor_ms.models.EmailModel;
 import com.ms.emissor.emissor_ms.services.EmailHandler;
 
+import jakarta.mail.MessagingException;
+
 @Service
 public class SendAndPersistEmailService implements EmailHandler {
     private final EmailSenderService emailSenderService;
@@ -20,7 +22,7 @@ public class SendAndPersistEmailService implements EmailHandler {
 
     @Override
     @Transactional
-    public EmailModel handleEmail(EmailModel emailModel) {
+    public EmailModel handleEmail(EmailModel emailModel) throws MessagingException {
         emailModel.setSendDateEmail(LocalDateTime.now());
 
         EmailModel sentEmailModel = emailSenderService.handleEmail(emailModel);

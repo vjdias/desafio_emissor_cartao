@@ -16,6 +16,8 @@ import com.ms.emissor.emissor_ms.services.impl.EmailPersistenceService;
 import com.ms.emissor.emissor_ms.services.impl.EmailSenderService;
 import com.ms.emissor.emissor_ms.services.impl.SendAndPersistEmailService;
 
+import jakarta.mail.MessagingException;
+
 @SpringBootTest
 class SendAndPersistEmailServiceTest {
 
@@ -39,9 +41,9 @@ class SendAndPersistEmailServiceTest {
     }
 
     @Test
-    void testHandleEmail() {
+    void testHandleEmail() throws MessagingException {
         emailModel.setStatusEmail(StatusEmail.SENT);
-        when(emailSenderService.handleEmail(any(EmailModel.class))).thenReturn(emailModel);
+    //    when(emailSenderService.handleEmail(any(EmailModel.class))).thenReturn(emailModel);
         when(emailPersistenceService.handleEmail(any(EmailModel.class))).thenReturn(emailModel);
 
         EmailModel result = sendAndPersistEmailService.handleEmail(emailModel);

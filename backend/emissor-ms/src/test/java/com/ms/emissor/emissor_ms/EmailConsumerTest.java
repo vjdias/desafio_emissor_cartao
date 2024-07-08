@@ -14,6 +14,8 @@ import com.ms.emissor.emissor_ms.dtos.request.EmailRecordDto;
 import com.ms.emissor.emissor_ms.models.EmailModel;
 import com.ms.emissor.emissor_ms.services.impl.SendAndPersistEmailService;
 
+import jakarta.mail.MessagingException;
+
 @SpringBootTest
 @SpringJUnitConfig
 class EmailConsumerTest {
@@ -29,10 +31,10 @@ class EmailConsumerTest {
     }
 
     @Test
-    void testListenEmailQueue() {
-        EmailRecordDto emailRecordDto = new EmailRecordDto(null, "test@example.com", "Test Subject", "Test Body");
+    void testListenEmailQueue() throws MessagingException {
+      EmailRecordDto emailRecordDto = new EmailRecordDto(null, "test@example.com", "Test Subject", "Test Body");
 
-        emailConsumer.listenEmailQueue(emailRecordDto);
+       emailConsumer.listenEmailQueue(emailRecordDto);
 
         verify(sendAndPersistEmailService).handleEmail(any(EmailModel.class));
     }
