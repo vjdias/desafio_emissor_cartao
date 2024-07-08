@@ -23,8 +23,14 @@ public class ClientProducer {
         var emailDto = new EmailDto();
         emailDto.setUserId(clientModel.getClientId());
         emailDto.setEmailTo(clientModel.getEmail());
-        emailDto.setSubject("Cadastro realizado com sucesso!");
-        emailDto.setText(clientModel.getEmailProposalContent());
+        emailDto.setSubject("Cadastro de novo cartão realizado com sucesso!");
+
+        String htmlTemplate = clientModel.getProposal().getEmailContent();
+        htmlTemplate = htmlTemplate.replace("{userName}", clientModel.getName());
+        htmlTemplate = htmlTemplate.replace("{creditLimit}", String.valueOf(clientModel.getLimitCredit()));
+        htmlTemplate = htmlTemplate.replace("{accountNumber}",  String.valueOf(clientModel.getAccount()));
+
+        emailDto.setText(htmlTemplate);
         rabbitTemplate.convertAndSend("", emailRoutingKey, emailDto);
     }
 }

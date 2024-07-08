@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ms.cartoes.cartoes_ms.dtos.request.ClientRecordDto;
+import com.ms.cartoes.cartoes_ms.dtos.response.ClientResponseDto;
 import com.ms.cartoes.cartoes_ms.mapper.ClientMapper;
-import com.ms.cartoes.cartoes_ms.models.ClientModel;
 import com.ms.cartoes.cartoes_ms.services.impl.ClientService;
 
 import jakarta.validation.Valid;
@@ -33,13 +33,12 @@ public class ClientController {
     }
 
     @PostMapping("/create_or_update")
-    public ResponseEntity<ClientModel> createOrUpdate(@RequestBody @Valid ClientRecordDto clientRecordDto) {
-        ClientMapper clientMapper = new ClientMapper();
-        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(clientMapper.toModel(clientRecordDto)));
+    public ResponseEntity<ClientResponseDto> createOrUpdate(@RequestBody @Valid ClientRecordDto clientRecordDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(clientService.save(clientRecordDto));
     }
     
     @GetMapping("/list")
-    public ResponseEntity<List<ClientModel>> getAllClients() {
+    public ResponseEntity<List<ClientResponseDto>> getAllClients() {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getAllClients());
     }
 

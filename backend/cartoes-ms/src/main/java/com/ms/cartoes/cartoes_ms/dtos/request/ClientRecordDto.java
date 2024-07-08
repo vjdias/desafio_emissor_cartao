@@ -8,9 +8,8 @@ public record ClientRecordDto(String clientId,
                             @NotBlank String name, 
                             @NotBlank @Email String email, 
                             @NotBlank String account, 
-                            @NotBlank String nameProposal,
-                            @NotBlank String emailProposalContent,
+                            @NotNull Boolean active,
+                            @NotNull String proposalId,
                             @NotNull  Double limitCredit
                             ) {
-
 }
